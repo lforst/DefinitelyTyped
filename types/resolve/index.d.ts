@@ -10,13 +10,17 @@ interface ToString {
 
 type StringOrToString = string | ToString;
 
+interface ResolveError extends Error {
+    code?: 'MODULE_NOT_FOUND' | 'INVALID_BASEDIR' | 'INVALID_PACKAGE_MAIN'
+}
+
 /**
  * Callback invoked when resolving asynchronously
  *
  * @param error
  * @param resolved Absolute path to resolved identifier
  */
-type resolveCallback = (err: Error | null, resolved?: string, pkg?: PackageMeta) => void;
+type resolveCallback = (err: ResolveError | null, resolved?: string, pkg?: PackageMeta) => void;
 
 /**
  * Callback invoked when checking if a file or directory exists
